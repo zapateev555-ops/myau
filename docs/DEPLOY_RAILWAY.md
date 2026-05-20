@@ -2,7 +2,7 @@
 
 Проект: **Laravel 13**, нужен **PHP 8.3+**. Railway обычно сам определяет Laravel и запускает через PHP + веб-сервер (Nixpacks/Railpack).
 
-В корне репозитория уже есть **`nixpacks.toml`** — в сборке явно используются **PHP 8.4** и **Composer** (как в стандартной инструкции для Nixpacks).
+В корне репозитория **`nixpacks.toml`**: PHP 8.4, Composer, Node.js, `composer install`, `npm run build`, запуск `php artisan serve` на порту `$PORT`.
 
 ## 1. Пока идёт деплой — переменные
 
