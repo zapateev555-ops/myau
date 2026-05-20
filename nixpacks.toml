@@ -1,0 +1,5 @@
+# Явно задаёт PHP 8.4 и Composer для сборки на Railway (Nixpacks).
+# https://nixpacks.com/docs/configuration/file
+
+[phases.setup]
+nixPkgs = ["php84", "php84Packages.composer"]

@@ -1,0 +1,8 @@
+# Railway — Laravel (миграции перед каждым деплоем)
+# https://docs.railway.com/guides/laravel
+
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+preDeployCommand = "php artisan migrate --force"
