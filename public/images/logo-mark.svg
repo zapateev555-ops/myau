@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" role="img" aria-label="Autoclub">
+  <circle cx="24" cy="24" r="19" stroke="#c9a962" stroke-width="2.75"/>
+  <circle cx="24" cy="24" r="7" fill="#c9a962"/>
+  <path stroke="#7eb8c4" stroke-width="2" stroke-linecap="round" d="M24 5v4M24 39v4M5 24h4M39 24h4"/>
+</svg>

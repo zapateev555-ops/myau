@@ -1,0 +1,775 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --nx-bg: #0b0b10;
+    --nx-panel: #14141c;
+    --nx-panel-2: #1a1a25;
+    --nx-border: rgba(255, 255, 255, 0.07);
+    --nx-text: #e8e8ef;
+    --nx-muted: #a8b3c7;
+    --nx-placeholder: #8f9bb3;
+    --nx-accent: #c9a962;
+    --nx-accent-dim: rgba(201, 169, 98, 0.15);
+    --nx-warn: #d4a84b;
+    --nx-danger: #b85c42;
+    --nx-info: #5eb8ff;
+    --nx-radius: 14px;
+    --nx-radius-lg: 20px;
+    --nx-font: 'Manrope', system-ui, sans-serif;
+    --nx-mono: 'JetBrains Mono', monospace;
+}
+
+.nx-body {
+    font-family: var(--nx-font);
+    background: var(--nx-bg);
+    color: var(--nx-text);
+    min-height: 100vh;
+    margin: 0;
+}
+
+.nx-app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ——— Top command bar ——— */
+.nx-command {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.85rem 1.5rem;
+    background: var(--nx-panel);
+    border-bottom: 1px solid var(--nx-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nx-command__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--nx-text);
+}
+
+.nx-command__brand img {
+    height: 40px;
+    width: auto;
+}
+
+.nx-command__brand span {
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: -0.02em;
+}
+
+.nx-command__brand em {
+    display: block;
+    font-style: normal;
+    font-size: 0.65rem;
+    font-family: var(--nx-mono);
+    color: var(--nx-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.nx-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    justify-content: center;
+}
+
+.nx-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--nx-radius);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--nx-muted);
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.nx-tab:hover {
+    color: var(--nx-text);
+    background: var(--nx-panel-2);
+}
+
+.nx-tab.is-active {
+    color: var(--nx-bg);
+    background: var(--nx-accent);
+    border-color: var(--nx-accent);
+}
+
+.nx-command__user {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.nx-command__user-name {
+    font-size: 0.8rem;
+    color: var(--nx-muted);
+    text-align: right;
+}
+
+.nx-command__user-name strong {
+    display: block;
+    color: var(--nx-text);
+    font-size: 0.9rem;
+}
+
+.nx-btn-ghost {
+    border: 1px solid var(--nx-border);
+    background: transparent;
+    color: var(--nx-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--nx-radius);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.nx-btn-ghost:hover {
+    border-color: var(--nx-danger);
+    color: var(--nx-danger);
+}
+
+.nx-btn-accent {
+    background: var(--nx-accent);
+    color: var(--nx-bg);
+    border: none;
+    font-weight: 700;
+    padding: 0.45rem 1rem;
+    border-radius: var(--nx-radius);
+    font-size: 0.85rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: filter 0.2s, transform 0.2s;
+}
+
+.nx-btn-accent:hover {
+    color: var(--nx-bg);
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+}
+
+.nx-btn-outline {
+    border: 1px solid var(--nx-border);
+    background: var(--nx-panel-2);
+    color: var(--nx-text);
+    font-weight: 600;
+    padding: 0.45rem 1rem;
+    border-radius: var(--nx-radius);
+    font-size: 0.85rem;
+}
+
+/* ——— Workspace ——— */
+.nx-workspace {
+    flex: 1;
+    padding: 1.5rem;
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.nx-page-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.nx-page-head h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 0;
+}
+
+.nx-page-head p {
+    margin: 0.25rem 0 0;
+    color: var(--nx-muted);
+    font-size: 0.9rem;
+}
+
+.nx-breadcrumb {
+    font-family: var(--nx-mono);
+    font-size: 0.7rem;
+    color: var(--nx-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.35rem;
+}
+
+/* ——— Alerts ——— */
+.nx-alert {
+    border-radius: var(--nx-radius);
+    padding: 0.85rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    border: 1px solid;
+}
+
+.nx-alert--success {
+    background: var(--nx-accent-dim);
+    border-color: rgba(201, 169, 98, 0.4);
+    color: var(--nx-accent);
+}
+
+.nx-alert--error {
+    background: rgba(255, 92, 106, 0.1);
+    border-color: rgba(255, 92, 106, 0.35);
+    color: var(--nx-danger);
+}
+
+/* ——— Bento dashboard ——— */
+.nx-bento {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.nx-metric {
+    background: var(--nx-panel);
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-lg);
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.nx-metric::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--metric-accent, var(--nx-accent));
+}
+
+.nx-metric--users { grid-column: span 2; --metric-accent: var(--nx-info); }
+.nx-metric--orders { grid-column: span 2; --metric-accent: var(--nx-accent); }
+.nx-metric--pending { grid-column: span 2; --metric-accent: var(--nx-warn); }
+.nx-metric--revenue { grid-column: span 3; --metric-accent: #a78bfa; }
+.nx-metric--products { grid-column: span 2; --metric-accent: var(--nx-muted); }
+.nx-metric--messages { grid-column: span 1; --metric-accent: var(--nx-danger); }
+
+.nx-metric__icon {
+    font-size: 1.1rem;
+    color: var(--metric-accent, var(--nx-accent));
+    margin-bottom: 0.5rem;
+}
+
+.nx-metric__value {
+    font-size: 1.85rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.nx-metric__label {
+    font-size: 0.75rem;
+    color: var(--nx-muted);
+    margin-top: 0.35rem;
+    font-weight: 500;
+}
+
+.nx-panel {
+    background: var(--nx-panel);
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-lg);
+    overflow: hidden;
+}
+
+.nx-panel__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--nx-border);
+}
+
+.nx-panel__head h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.nx-panel__body {
+    padding: 1.25rem;
+}
+
+.nx-panel__body--flush {
+    padding: 0;
+}
+
+.nx-dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+}
+
+/* ——— Tables ——— */
+.nx-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.nx-table th {
+    text-align: left;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--nx-muted);
+    background: var(--nx-panel-2);
+    border-bottom: 1px solid var(--nx-border);
+}
+
+.nx-table td {
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--nx-border);
+    vertical-align: middle;
+}
+
+.nx-table tbody tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.nx-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ——— Status badges ——— */
+.status-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.3em 0.65em;
+    border-radius: 6px;
+}
+
+.status-badge.status-pending { background: rgba(255, 176, 32, 0.2); color: var(--nx-warn); }
+.status-badge.status-processing { background: rgba(94, 184, 255, 0.2); color: var(--nx-info); }
+.status-badge.status-shipped { background: rgba(167, 139, 250, 0.2); color: #a78bfa; }
+.status-badge.status-completed { background: rgba(30, 107, 122, 0.35); color: #8fd4e0; }
+.status-badge.status-cancelled { background: rgba(255, 92, 106, 0.2); color: var(--nx-danger); }
+
+/* ——— Forms in admin ——— */
+.nx-body .form-control,
+.nx-body .form-select {
+    background: var(--nx-panel-2);
+    border: 1px solid var(--nx-border);
+    color: var(--nx-text);
+    border-radius: var(--nx-radius);
+    padding: 0.55rem 0.85rem;
+    min-height: 2.625rem;
+    line-height: 1.35;
+}
+
+.nx-body .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-height: 2.625rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--nx-radius);
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1.25;
+    white-space: nowrap;
+}
+
+.nx-body .btn-sm {
+    min-height: 2.125rem;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.82rem;
+    border-radius: 10px;
+}
+
+.nx-filter-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nx-form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nx-form-actions .btn {
+    width: 100%;
+}
+
+.nx-body .form-control:focus,
+.nx-body .form-select:focus {
+    background: var(--nx-panel-2);
+    border-color: var(--nx-accent);
+    color: var(--nx-text);
+    box-shadow: 0 0 0 3px var(--nx-accent-dim);
+}
+
+.nx-body .form-label,
+.nx-body label.small.text-muted {
+    color: #c5cede;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.nx-body .form-control::placeholder,
+.nx-body .form-select::placeholder,
+.nx-body textarea::placeholder {
+    color: var(--nx-placeholder);
+    opacity: 1;
+}
+
+.nx-body .form-text {
+    color: var(--nx-muted);
+    font-size: 0.78rem;
+}
+
+.nx-body .card {
+    background: var(--nx-panel);
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-lg);
+    color: var(--nx-text);
+}
+
+.nx-body .card-header {
+    background: var(--nx-panel-2) !important;
+    border-bottom: 1px solid var(--nx-border);
+    color: var(--nx-text);
+}
+
+/* Bootstrap tables — force dark theme (fix white rows / invisible text) */
+.nx-body .table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--nx-text);
+    --bs-table-border-color: var(--nx-border);
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.02);
+    --bs-table-hover-bg: rgba(255, 255, 255, 0.05);
+    --bs-table-active-bg: rgba(255, 255, 255, 0.06);
+    margin-bottom: 0;
+}
+
+.nx-body .table > :not(caption) > * > * {
+    background-color: transparent !important;
+    color: var(--nx-text) !important;
+    border-color: var(--nx-border) !important;
+    box-shadow: none !important;
+}
+
+.nx-body .table thead th,
+.nx-body .table-light th {
+    background-color: var(--nx-panel-2) !important;
+    color: var(--nx-muted) !important;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.nx-body .table tbody tr:hover > * {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: var(--nx-text) !important;
+}
+
+.nx-body .table tfoot td {
+    background-color: var(--nx-panel-2) !important;
+    color: var(--nx-text) !important;
+    border-color: var(--nx-border) !important;
+}
+
+.nx-body .card-header.bg-white,
+.nx-body .card-footer.bg-white {
+    background: var(--nx-panel-2) !important;
+    color: var(--nx-text) !important;
+    border-color: var(--nx-border) !important;
+}
+
+.nx-body .card-header h5,
+.nx-body .card-body strong {
+    color: var(--nx-text);
+}
+
+.nx-body .card-body p {
+    color: var(--nx-text);
+}
+
+.nx-body .card-body a:not(.btn) {
+    color: var(--nx-info);
+}
+
+.nx-body .badge.bg-dark {
+    background: var(--nx-accent-dim) !important;
+    color: var(--nx-accent) !important;
+}
+
+.nx-body .badge.bg-secondary {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: var(--nx-muted) !important;
+}
+
+.nx-body .badge.bg-success {
+    background: rgba(30, 107, 122, 0.35) !important;
+    color: #8fd4e0 !important;
+}
+
+.nx-body .pagination {
+    --bs-pagination-bg: var(--nx-panel-2);
+    --bs-pagination-border-color: var(--nx-border);
+    --bs-pagination-color: var(--nx-text);
+    --bs-pagination-hover-bg: rgba(255, 255, 255, 0.06);
+    --bs-pagination-hover-color: var(--nx-accent);
+    --bs-pagination-active-bg: var(--nx-accent);
+    --bs-pagination-active-border-color: var(--nx-accent);
+    --bs-pagination-active-color: var(--nx-bg);
+    --bs-pagination-disabled-bg: var(--nx-panel);
+    --bs-pagination-disabled-color: var(--nx-muted);
+}
+
+.nx-body .page-link {
+    background-color: var(--nx-panel-2);
+    border-color: var(--nx-border);
+    color: var(--nx-text);
+}
+
+.nx-product-photo {
+    background: var(--nx-panel-2);
+    border: 1px solid var(--nx-border);
+    border-radius: 10px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 72px;
+    margin-bottom: 0.5rem;
+}
+
+.nx-product-photo img {
+    max-width: 100%;
+    max-height: 64px;
+    object-fit: contain;
+}
+
+.nx-body .text-muted {
+    color: var(--nx-muted) !important;
+}
+
+/* ——— Custom file upload button ——— */
+.nx-upload-btn {
+    display: block;
+    cursor: pointer;
+    margin: 0;
+}
+
+.nx-upload-btn__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.nx-upload-btn__face {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: var(--nx-panel-2);
+    border: 1px dashed rgba(201, 169, 98, 0.5);
+    border-radius: var(--nx-radius);
+    color: #e8ecf4;
+    font-size: 0.78rem;
+    font-weight: 600;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.nx-upload-btn:hover .nx-upload-btn__face {
+    border-color: var(--nx-accent);
+    background: var(--nx-accent-dim);
+    color: var(--nx-accent);
+}
+
+.nx-upload-btn__icon {
+    flex-shrink: 0;
+}
+
+.nx-body .btn-outline-danger {
+    border-color: rgba(184, 92, 66, 0.65);
+    color: #f5b5a8;
+    background: rgba(184, 92, 66, 0.15);
+}
+
+.nx-body .btn-outline-danger:hover {
+    background: rgba(184, 92, 66, 0.28);
+    border-color: #d46a52;
+    color: #ffe0d8;
+}
+
+.nx-body .btn-outline-secondary {
+    color: #d0d8e8;
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.nx-body .btn-outline-secondary:hover {
+    color: var(--nx-text);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+.nx-body .btn-primary-custom,
+.nx-body .btn-accent {
+    --bs-btn-hover-bg: #dfc88a;
+    --bs-btn-hover-color: var(--nx-bg);
+    --bs-btn-hover-border-color: transparent;
+    background: var(--nx-accent);
+    color: var(--nx-bg) !important;
+    border: none;
+    font-weight: 700;
+}
+
+.nx-body .btn-primary-custom:hover,
+.nx-body .btn-accent:hover {
+    background: #dfc88a !important;
+    color: var(--nx-bg) !important;
+    border-color: transparent !important;
+}
+
+.nx-body .btn-outline-primary,
+.nx-body .btn-outline-secondary {
+    border-color: var(--nx-border);
+    color: var(--nx-text);
+}
+
+.nx-body .btn-outline-primary:hover {
+    background: var(--nx-accent-dim);
+    border-color: var(--nx-accent);
+    color: var(--nx-accent);
+}
+
+.nx-status-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.nx-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--nx-border);
+    font-size: 0.9rem;
+}
+
+.nx-status-row:last-child {
+    border-bottom: none;
+}
+
+.nx-status-row .badge {
+    background: var(--nx-panel-2);
+    color: var(--nx-accent);
+    font-family: var(--nx-mono);
+}
+
+.nx-mobile-toggle {
+    display: none;
+    background: var(--nx-panel-2);
+    border: 1px solid var(--nx-border);
+    color: var(--nx-text);
+    padding: 0.4rem 0.65rem;
+    border-radius: var(--nx-radius);
+}
+
+@media (max-width: 1200px) {
+    .nx-metric--users,
+    .nx-metric--orders,
+    .nx-metric--pending,
+    .nx-metric--revenue,
+    .nx-metric--products,
+    .nx-metric--messages {
+        grid-column: span 4;
+    }
+
+    .nx-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .nx-command {
+        grid-template-columns: auto auto 1fr;
+        gap: 0.75rem;
+    }
+
+    .nx-tabs {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--nx-panel);
+        border-bottom: 1px solid var(--nx-border);
+        padding: 0.75rem 1rem;
+        flex-direction: column;
+    }
+
+    .nx-tabs.is-open {
+        display: flex;
+    }
+
+    .nx-mobile-toggle {
+        display: inline-flex;
+    }
+
+    .nx-bento {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nx-metric--users,
+    .nx-metric--orders,
+    .nx-metric--pending,
+    .nx-metric--revenue,
+    .nx-metric--products,
+    .nx-metric--messages {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 576px) {
+    .nx-workspace {
+        padding: 1rem;
+    }
+
+    .nx-command__user-name {
+        display: none;
+    }
+}

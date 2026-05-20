@@ -1,0 +1,38 @@
+@extends('shop.layouts.app')
+@section('title', 'Вход')
+@section('content')
+<div class="auth-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="glass-card">
+                    <div class="glass-card-header">
+                        <h3 class="mb-0 fw-bold"><i class="fas fa-right-to-bracket me-2"></i>Вход</h3>
+                    </div>
+                    <div class="p-4 p-md-5">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" name="email" class="form-control" value="{{ old('email') }}" required autofocus>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Пароль</label>
+                                <input type="password" name="password" class="form-control" required>
+                            </div>
+                            <div class="mb-4 form-check">
+                                <input type="checkbox" name="remember" class="form-check-input" id="remember">
+                                <label class="form-check-label" for="remember">Запомнить меня</label>
+                            </div>
+                            <div class="ac-form-actions ac-form-actions--stack">
+                                <button type="submit" class="btn btn-glow w-100">Войти</button>
+                                <a href="{{ route('register') }}" class="btn btn-outline-ac w-100">Регистрация</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

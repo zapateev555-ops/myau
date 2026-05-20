@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 52" fill="none" role="img" aria-label="Autoclub">
+  <g transform="translate(2, 4)">
+    <circle cx="22" cy="22" r="18" stroke="#c9a962" stroke-width="2.5"/>
+    <circle cx="22" cy="22" r="6.5" fill="#c9a962"/>
+    <path stroke="#7eb8c4" stroke-width="2" stroke-linecap="round" d="M22 4v4M22 36v4M4 22h4M36 22h4"/>
+  </g>
+  <text x="52" y="34" font-family="Manrope, system-ui, sans-serif" font-size="26" font-weight="700" letter-spacing="-0.5" fill="#ffffff">Auto<tspan fill="#c9a962">club</tspan></text>
+</svg>
