@@ -1,5 +1,3 @@
-providers = ["php", "node"]
-
 [phases.setup]
 nixPkgs = ["php84", "nodejs", "composer"]
 
