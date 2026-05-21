@@ -1,3 +1,2 @@
-git add .
-git commit -m "fix nixpacks"
-git push
+[phases.setup]
+nixPkgs = ["php84", "nodejs"]
