@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use RuntimeException;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,16 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        if ($this->app->environment('production')) {
+            if (config('database.default') === 'sqlite') {
+                throw new RuntimeException(
+                    'На Railway нужен PostgreSQL: DB_CONNECTION=pgsql и DB_URL (см. railway.env.example).'
+                );
+            }
+
+            URL::forceScheme('https');
+        }
+
         View::composer('shop.layouts.app', function ($view) {
             $cartItemsCount = 0;
 
