@@ -36,16 +36,16 @@
     --ac-overlay-hero: linear-gradient(105deg, rgba(10, 10, 15, 0.93) 0%, rgba(18, 18, 24, 0.82) 42%, rgba(10, 10, 15, 0.72) 100%);
     --ac-overlay-header: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(22, 22, 31, 0.82) 100%);
     --ac-overlay-footer: linear-gradient(180deg, rgba(10, 10, 15, 0.94) 0%, rgba(10, 10, 15, 0.98) 100%);
-    --ac-img-hero: url('https://images.unsplash.com/photo-1619642751034-765dfdf1750b?auto=format&fit=crop&w=1920&q=80');
-    --ac-img-catalog: url('https://images.unsplash.com/photo-1601362840469-0513eb534da0?auto=format&fit=crop&w=1920&q=80');
-    --ac-img-about: url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1920&q=80');
-    --ac-img-contacts: url('https://images.unsplash.com/photo-1565043583227-84e3b6e3d621?auto=format&fit=crop&w=1920&q=80');
-    --ac-img-delivery: url('https://images.unsplash.com/photo-1601584111127-372f6556f6f5?auto=format&fit=crop&w=1920&q=80');
-    --ac-img-service: url('https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=1920&q=80');
-    --ac-img-guarantee: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1920&q=80');
-    --ac-img-legal: url('https://images.unsplash.com/photo-1449965405599-d296ea04e9b0?auto=format&fit=crop&w=1920&q=80');
-    --ac-img-auth: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1920&q=80');
-    --ac-img-benefits: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80');
+    --ac-img-hero: url('/images/heroes/hero.jpg');
+    --ac-img-catalog: url('/images/heroes/catalog.jpg');
+    --ac-img-about: url('/images/heroes/about.jpg');
+    --ac-img-contacts: url('/images/heroes/contacts.jpg');
+    --ac-img-delivery: url('/images/heroes/delivery.jpg');
+    --ac-img-service: url('/images/heroes/service.jpg');
+    --ac-img-guarantee: url('/images/heroes/guarantee.jpg');
+    --ac-img-legal: url('/images/heroes/legal.jpg');
+    --ac-img-auth: url('/images/heroes/auth.jpg');
+    --ac-img-benefits: url('/images/heroes/benefits.jpg');
     --ac-text-on-dark: #ffffff;
     --ac-text-on-dark-muted: rgba(255, 255, 255, 0.88);
     --ac-text-body: #3a3a4a;
@@ -681,15 +681,15 @@ body.ac-body {
 }
 
 .category-card--letnie {
-    background-image: linear-gradient(180deg, rgba(255, 254, 249, 0.92) 0%, rgba(255, 254, 249, 0.98) 55%), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80');
+    background-image: linear-gradient(180deg, rgba(255, 254, 249, 0.92) 0%, rgba(255, 254, 249, 0.98) 55%), url('/images/heroes/bento-drive.jpg');
 }
 
 .category-card--zimnie {
-    background-image: linear-gradient(180deg, rgba(255, 254, 249, 0.92) 0%, rgba(255, 254, 249, 0.98) 55%), url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=800&q=80');
+    background-image: linear-gradient(180deg, rgba(255, 254, 249, 0.92) 0%, rgba(255, 254, 249, 0.98) 55%), url('/images/heroes/bento-winter.jpg');
 }
 
 .category-card--vsesezonnye {
-    background-image: linear-gradient(180deg, rgba(255, 254, 249, 0.92) 0%, rgba(255, 254, 249, 0.98) 55%), url('https://images.unsplash.com/photo-1449965405599-d296ea04e9b0?auto=format&fit=crop&w=800&q=80');
+    background-image: linear-gradient(180deg, rgba(255, 254, 249, 0.92) 0%, rgba(255, 254, 249, 0.98) 55%), url('/images/heroes/bento-legal.jpg');
 }
 
 .category-card:hover {
