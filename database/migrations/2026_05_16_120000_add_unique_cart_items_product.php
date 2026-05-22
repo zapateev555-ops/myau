@@ -10,9 +10,9 @@ return new class extends Migration
     public function up(): void
     {
         $duplicates = DB::table('cart_items')
-            ->select('cart_id', 'product_id', DB::raw('MIN(id) as keep_id'), DB::raw('SUM(quantity) as total_qty'), DB::raw('COUNT(*) as cnt'))
+            ->select('cart_id', 'product_id', DB::raw('MIN(id) as keep_id'), DB::raw('SUM(quantity) as total_qty'))
             ->groupBy('cart_id', 'product_id')
-            ->having('cnt', '>', 1)
+            ->havingRaw('COUNT(*) > 1')
             ->get();
 
         foreach ($duplicates as $row) {
