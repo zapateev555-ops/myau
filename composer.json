@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "autoclub/shop",
+    "name": "zapateev555-ops/myau",
     "type": "project",
     "description": "МоторДеталь — интернет-магазин автозапчастей",
     "keywords": ["laravel", "shop"],

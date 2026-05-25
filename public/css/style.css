@@ -725,8 +725,6 @@ thead.ac-card-header-dark th {
     color: #fff !important;
 }
 
-.ac-shell, .ac-navbar, .ac-ribbon, .ac-dock, .hero-section { display: none !important; }
-
 @media (max-width: 992px) {
     .mp-product-grid { grid-template-columns: repeat(3, 1fr); }
     .mp-catalog-layout { grid-template-columns: 1fr; }

@@ -54,24 +54,17 @@ document.addEventListener('DOMContentLoaded', function () {
         return sum;
     }
 
-    function updateDockBadge(count) {
-        document.querySelectorAll('.ac-navbar__badge, .ac-dock__badge').forEach(function (badge) {
-            if (count > 0) {
-                badge.textContent = String(count);
-                badge.style.display = '';
-            } else {
-                badge.style.display = 'none';
-            }
-        });
-
-        document.querySelectorAll('.ac-topbar .badge.bg-danger').forEach(function (badge) {
-            if (count > 0) {
-                badge.textContent = String(count);
-                badge.style.display = '';
-            } else {
-                badge.style.display = 'none';
-            }
-        });
+    function updateCartBadge(count) {
+        var badge = document.querySelector('.mp-cart-btn em');
+        if (!badge) {
+            return;
+        }
+        if (count > 0) {
+            badge.textContent = String(count);
+            badge.style.display = '';
+        } else {
+            badge.style.display = 'none';
+        }
     }
 
     function saveQuantity(input) {
@@ -121,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 if (typeof data.cart_items_count !== 'undefined') {
-                    updateDockBadge(data.cart_items_count);
+                    updateCartBadge(data.cart_items_count);
                 }
             })
             .catch(function () {

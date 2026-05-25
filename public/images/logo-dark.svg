@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40">
-  <rect width="40" height="40" rx="10" fill="#e53935"/>
-  <path d="M12 20h4l2-5 2 10 2-7h4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <text x="48" y="27" font-family="Inter,Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#f3f4f6">Мотор</text>
-  <text x="108" y="27" font-family="Inter,Arial,Helvetica,sans-serif" font-size="18" font-weight="700" fill="#e53935">Деталь</text>
-</svg>
