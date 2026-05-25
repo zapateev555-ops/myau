@@ -50,6 +50,6 @@
 </div>
 
 @if($messages->hasPages())
-<div class="mt-3">{{ $messages->links() }}</div>
+<div class="mt-3 nx-pagination-wrap">{{ $messages->withQueryString()->links('pagination::admin') }}</div>
 @endif
 @endsection

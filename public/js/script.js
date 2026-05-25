@@ -1,34 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.ac-alert').forEach(function (alertEl) {
-        var closeBtn = alertEl.querySelector('.ac-alert__close');
-        if (!closeBtn) {
-            return;
-        }
-
-        closeBtn.addEventListener('click', function () {
+        var hideAlert = function () {
             if (alertEl.classList.contains('is-hiding')) {
                 return;
             }
-
             alertEl.classList.add('is-hiding');
-
-            var removed = false;
-            var removeAlert = function () {
-                if (removed) {
-                    return;
-                }
-                removed = true;
+            window.setTimeout(function () {
                 alertEl.remove();
-            };
-
-            alertEl.addEventListener('transitionend', function (event) {
-                if (event.target === alertEl && event.propertyName === 'max-height') {
-                    removeAlert();
-                }
-            });
-
-            window.setTimeout(removeAlert, 450);
-        });
+            }, 400);
+        };
+        window.setTimeout(hideAlert, 10000);
     });
 
     document.querySelectorAll('form[action*="cart/add"]').forEach(function (form) {

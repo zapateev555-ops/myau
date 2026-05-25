@@ -2,7 +2,7 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "autoclub/shop",
     "type": "project",
-    "description": "Autoclub — интернет-магазин шин",
+    "description": "МоторДеталь — интернет-магазин автозапчастей",
     "keywords": ["laravel", "shop"],
     "license": "MIT",
     "require": {

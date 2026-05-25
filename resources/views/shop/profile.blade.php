@@ -1,7 +1,7 @@
 @extends('shop.layouts.app')
 @section('title', 'Профиль')
 @section('content')
-<div class="container py-5">
+<div class="mp-container py-5">
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="card text-center p-4 shadow-sm">
@@ -36,8 +36,8 @@
                 <div class="card-body">
                     @if($orders->isNotEmpty())
                     <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead><tr><th>№</th><th>Дата</th><th>Сумма</th><th>Статус</th><th></th></tr></thead>
+                        <table class="table table-hover mb-0">
+                            <thead class="ac-card-header-dark"><tr><th>№</th><th>Дата</th><th>Сумма</th><th>Статус</th><th></th></tr></thead>
                             <tbody>
                                 @foreach($orders as $order)
                                 <tr>

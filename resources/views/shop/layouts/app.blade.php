@@ -3,150 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Autoclub') — интернет-магазин автомобильных шин</title>
-    <meta name="description" content="Autoclub — интернет-магазин автомобильных шин. Летние, зимние и всесезонные модели с доставкой по России.">
+    <title>@yield('title', 'МоторДеталь') — автозапчасти</title>
+    <meta name="description" content="МоторДеталь — интернет-магазин автозапчастей. Каталог, доставка, подбор по артикулу.">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/svg+xml" href="{{ asset('images/logo.svg') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/logo-mark.svg') }}">
+    <script>
+        (function () {
+            var t = localStorage.getItem('md-theme');
+            if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ filemtime(public_path('css/style.css')) }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
     @stack('styles')
 </head>
-<body class="ac-body">
-<div class="ac-shell">
-    <aside class="ac-dock" aria-label="Основная навигация">
-        <a href="{{ route('index') }}" class="ac-dock__logo" title="Autoclub">
-            <img src="{{ asset('images/logo-mark.svg') }}" alt="Autoclub">
-        </a>
-        <nav class="ac-dock__nav">
-            <a href="{{ route('index') }}" class="ac-dock__link {{ request()->routeIs('index') ? 'is-active' : '' }}" title="Главная">
-                <i class="fas fa-house"></i><span>Главная</span>
+<body class="mp-body">
+<div class="mp-wrap">
+    <header class="mp-header">
+        <div class="mp-container mp-header__row">
+            <a href="{{ route('index') }}" class="mp-logo" title="МоторДеталь">
+                <img src="{{ asset('images/logo-mark.svg') }}" alt="" class="mp-logo__mark" width="40" height="40" decoding="async">
+                <span class="mp-logo__text"><span class="mp-logo__motor">Мотор</span><span class="mp-logo__detal">Деталь</span></span>
             </a>
-            <a href="{{ route('products') }}" class="ac-dock__link {{ request()->routeIs('products', 'product.show') ? 'is-active' : '' }}" title="Каталог">
-                <i class="fas fa-grip"></i><span>Каталог</span>
-            </a>
-            <a href="{{ route('about') }}" class="ac-dock__link {{ request()->routeIs('about') ? 'is-active' : '' }}" title="О нас">
-                <i class="fas fa-circle-info"></i><span>О нас</span>
-            </a>
-            <a href="{{ route('contacts') }}" class="ac-dock__link {{ request()->routeIs('contacts*') ? 'is-active' : '' }}" title="Контакты">
-                <i class="fas fa-paper-plane"></i><span>Контакты</span>
-            </a>
-            @auth
-            <a href="{{ route('cart') }}" class="ac-dock__link {{ request()->routeIs('cart') ? 'is-active' : '' }}" title="Корзина">
-                <i class="fas fa-cart-shopping"></i><span>Корзина</span>
-                @if($cartItemsCount > 0)
-                <span class="ac-dock__badge">{{ $cartItemsCount }}</span>
+
+            <form class="mp-search" action="{{ route('products') }}" method="get" role="search">
+                <input type="search" name="q" class="mp-search__input" placeholder="Артикул, название запчасти…" value="{{ request('q') }}" autocomplete="off">
+                <button type="submit" class="mp-search__btn">Найти</button>
+            </form>
+
+            <div class="mp-header__actions">
+                <button type="button" class="mp-theme-btn" data-theme-toggle aria-label="Светлая или тёмная тема" title="Сменить тему">
+                    <i class="fas fa-moon mp-theme-btn__icon mp-theme-btn__icon--dark" aria-hidden="true"></i>
+                    <i class="fas fa-sun mp-theme-btn__icon mp-theme-btn__icon--light" aria-hidden="true"></i>
+                </button>
+                @auth
+                @if(auth()->user()->isAdmin())
+                <a href="{{ route('admin.dashboard') }}" class="mp-admin-btn" title="Админ-панель">ADMIN</a>
                 @endif
-            </a>
-            @endauth
+                <a href="{{ route('cart') }}" class="mp-cart-btn">
+                    <i class="fas fa-cart-shopping"></i>
+                    <span>Корзина</span>
+                    @if($cartItemsCount > 0)<em>{{ $cartItemsCount }}</em>@endif
+                </a>
+                <a href="{{ route('profile') }}" class="mp-header__link mp-header__link--account d-none d-lg-inline-flex"><i class="fas fa-user"></i><span>Кабинет</span></a>
+                @else
+                <a href="{{ route('login') }}" class="mp-header__link"><i class="fas fa-right-to-bracket"></i><span>Войти</span></a>
+                <a href="{{ route('register') }}" class="mp-header__link d-none d-md-inline-flex">Регистрация</a>
+                @endauth
+                <button type="button" class="mp-burger d-lg-none" id="mpBurger" aria-label="Меню"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+
+        <nav class="mp-nav" id="mpNav">
+            <div class="mp-container mp-nav__inner">
+                <a href="{{ route('index') }}" class="{{ request()->routeIs('index') ? 'is-active' : '' }}">Главная</a>
+                <a href="{{ route('products') }}" class="{{ request()->routeIs('products', 'product.show') ? 'is-active' : '' }}">Каталог</a>
+                <a href="{{ route('services.delivery') }}">Доставка</a>
+                <a href="{{ route('services.guarantee') }}">Гарантия</a>
+                <a href="{{ route('services.tire-service') }}">СТО</a>
+                <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'is-active' : '' }}">О магазине</a>
+                <a href="{{ route('contacts') }}" class="{{ request()->routeIs('contacts*') ? 'is-active' : '' }}">Контакты</a>
+            </div>
         </nav>
-        <div class="ac-dock__bottom">
-            @auth
-            @if(auth()->user()->isAdmin())
-            <a href="{{ route('admin.dashboard') }}" class="ac-dock__link ac-dock__link--admin {{ request()->routeIs('admin.*') ? 'is-active' : '' }}" title="Админ-панель">
-                <span class="ac-dock__link-icon"><img src="{{ asset('images/logo-mark.svg') }}" alt="" width="20" height="20"></span>
-                <span>Админ</span>
-            </a>
-            @endif
-            <a href="{{ route('profile') }}" class="ac-dock__link {{ request()->routeIs('profile*', 'orders', 'order.*') ? 'is-active' : '' }}" title="Профиль">
-                <i class="fas fa-user"></i><span>Профиль</span>
-            </a>
-            @else
-            <a href="{{ route('login') }}" class="ac-dock__link {{ request()->routeIs('login', 'register') ? 'is-active' : '' }}" title="Войти">
-                <i class="fas fa-right-to-bracket"></i><span>Войти</span>
-            </a>
-            @endauth
-        </div>
-    </aside>
+    </header>
 
-    <div class="ac-stage">
-        <header class="ac-topbar">
-            <a href="{{ route('index') }}"><img src="{{ asset('images/logo.svg') }}" alt="Autoclub" class="ac-brand-logo ac-brand-logo--topbar"></a>
-            <span class="ac-topbar__title">Autoclub</span>
-            @auth
-            <a href="{{ route('cart') }}" class="text-white position-relative">
-                <i class="fas fa-cart-shopping fa-lg"></i>
-                @if($cartItemsCount > 0)<span class="badge bg-danger position-absolute top-0 start-100 translate-middle">{{ $cartItemsCount }}</span>@endif
-            </a>
-            @else
-            <a href="{{ route('login') }}" class="btn btn-sm btn-glow">Войти</a>
-            @endauth
-        </header>
+    <div class="mp-alerts mp-container">@include('shop.partials.alerts')</div>
 
-        <div class="ac-ribbon d-none d-lg-flex">
-            <a href="{{ route('services.delivery') }}" class="ac-ribbon__item">
-                <img src="{{ asset('images/icon-delivery.svg') }}" alt="" width="18" height="18"> Бесплатная доставка от 10 000 ₽
-            </a>
-            <a href="{{ route('services.guarantee') }}" class="ac-ribbon__item">
-                <img src="{{ asset('images/icon-guarantee.svg') }}" alt="" width="18" height="18"> Гарантия подлинности
-            </a>
-            <a href="{{ route('services.tire-service') }}" class="ac-ribbon__item">
-                <img src="{{ asset('images/icon-tire-service.svg') }}" alt="" width="18" height="18"> Шиномонтаж
-            </a>
-        </div>
+    <main class="mp-main">@yield('content')</main>
 
-        <div class="ac-alerts">@include('shop.partials.alerts')</div>
-
-        <main class="ac-main">@yield('content')</main>
-
-        <footer class="site-footer">
-            <div class="container-fluid px-0">
-                <div class="row">
-                    <div class="col-lg-4 mb-4 footer-brand">
-                        <img src="{{ asset('images/logo.svg') }}" alt="Autoclub" class="ac-brand-logo ac-brand-logo--footer">
-                        <p class="small mb-0 mt-2">Интернет-магазин автомобильных шин. Качественная резина для любого сезона.</p>
-                    </div>
-                    <div class="col-md-4 col-lg-4 mb-4">
-                        <h5>Услуги</h5>
-                        <p class="mb-2"><a href="{{ route('services.delivery') }}">Доставка</a></p>
-                        <p class="mb-2"><a href="{{ route('services.guarantee') }}">Гарантия подлинности</a></p>
-                        <p class="mb-0"><a href="{{ route('services.tire-service') }}">Шиномонтаж</a></p>
-                    </div>
-                    <div class="col-md-4 col-lg-4 mb-4 footer-social">
-                        <h5>Контакты</h5>
-                        <p class="mb-2"><i class="fas fa-phone me-2"></i> +7 (999) 154-56-56</p>
-                        <p class="mb-2"><i class="fas fa-envelope me-2"></i> info@autoclub.ru</p>
-                        <p class="mb-3"><i class="fas fa-location-dot me-2"></i> г. Чебоксары, ул. Автомобильная, 10</p>
-                        <div class="social-links">
-                            <a href="#" aria-label="VK"><i class="fab fa-vk"></i></a>
-                            <a href="https://max.ru" target="_blank" rel="noopener noreferrer" class="social-max" aria-label="MAX">
-                                <img src="{{ asset('images/icon-max.svg') }}" alt="MAX" width="22" height="22">
-                            </a>
-                        </div>
-                    </div>
+    <footer class="mp-footer">
+        <div class="mp-container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <a href="{{ route('index') }}" class="mp-logo mp-logo--footer mb-3">
+                        <img src="{{ asset('images/logo-mark.svg') }}" alt="" class="mp-logo__mark" width="36" height="36" decoding="async">
+                        <span class="mp-logo__text"><span class="mp-logo__motor">Мотор</span><span class="mp-logo__detal">Деталь</span></span>
+                    </a>
+                    <p class="mp-footer__text">Интернет-магазин автозапчастей для легковых и коммерческих автомобилей.</p>
                 </div>
-                <div class="pt-4 mt-2 border-top border-secondary border-opacity-25 text-center">
-                    <p class="mb-2 small">
-                        <a href="{{ route('privacy') }}">Политика конфиденциальности</a>
-                        <span class="mx-2 opacity-50">·</span>
-                        <a href="{{ route('offer') }}">Публичная оферта</a>
-                    </p>
-                    <p class="mb-0 small opacity-75">&copy; {{ date('Y') }} Autoclub</p>
+                <div class="col-md-4">
+                    <h6>Покупателям</h6>
+                    <ul class="mp-footer__links">
+                        <li><a href="{{ route('services.delivery') }}">Доставка</a></li>
+                        <li><a href="{{ route('services.guarantee') }}">Гарантия</a></li>
+                        <li><a href="{{ route('offer') }}">Оферта</a></li>
+                        <li><a href="{{ route('privacy') }}">Конфиденциальность</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6>Контакты</h6>
+                    <ul class="mp-footer__links">
+                        <li><a href="tel:+79991545656">+7 (999) 154-56-56</a></li>
+                        <li><a href="mailto:info@motordetal.ru">info@motordetal.ru</a></li>
+                        <li>г. Чебоксары, ул. Гаражная, 14</li>
+                    </ul>
                 </div>
             </div>
-        </footer>
-    </div>
-
-    <nav class="ac-dock-mobile d-lg-none" aria-label="Мобильная навигация">
-        <a href="{{ route('index') }}" class="ac-dock__link {{ request()->routeIs('index') ? 'is-active' : '' }}"><i class="fas fa-house"></i><span>Главная</span></a>
-        <a href="{{ route('products') }}" class="ac-dock__link {{ request()->routeIs('products', 'product.show') ? 'is-active' : '' }}"><i class="fas fa-grip"></i><span>Каталог</span></a>
-        @auth
-        <a href="{{ route('cart') }}" class="ac-dock__link {{ request()->routeIs('cart') ? 'is-active' : '' }}"><i class="fas fa-cart-shopping"></i><span>Корзина</span></a>
-        @if(auth()->user()->isAdmin())
-        <a href="{{ route('admin.dashboard') }}" class="ac-dock__link ac-dock__link--admin {{ request()->routeIs('admin.*') ? 'is-active' : '' }}"><span class="ac-dock__link-icon"><img src="{{ asset('images/logo-mark.svg') }}" alt="" width="20" height="20"></span><span>Админ</span></a>
-        @endif
-        <a href="{{ route('profile') }}" class="ac-dock__link {{ request()->routeIs('profile*', 'orders', 'order.*') ? 'is-active' : '' }}"><i class="fas fa-user"></i><span>Профиль</span></a>
-        @else
-        <a href="{{ route('contacts') }}" class="ac-dock__link"><i class="fas fa-paper-plane"></i><span>Контакты</span></a>
-        <a href="{{ route('login') }}" class="ac-dock__link"><i class="fas fa-right-to-bracket"></i><span>Войти</span></a>
-        @endauth
-    </nav>
+            <div class="mp-footer__copy">&copy; {{ date('Y') }} МоторДеталь</div>
+        </div>
+    </footer>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{{ asset('js/script.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+<script src="{{ asset('js/theme.js') }}?v={{ filemtime(public_path('js/theme.js')) }}" defer></script>
+<script src="{{ asset('js/script.js') }}?v={{ filemtime(public_path('js/script.js')) }}" defer></script>
+<script defer>
+document.getElementById('mpBurger')?.addEventListener('click', function () {
+    document.getElementById('mpNav')?.classList.toggle('is-open');
+});
+</script>
 @stack('scripts')
 </body>
 </html>

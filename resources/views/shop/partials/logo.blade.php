@@ -1,3 +1,3 @@
 <a href="{{ route('index') }}" class="brand-logo {{ $class ?? '' }}">
-    <img src="{{ asset('images/logo.svg') }}" alt="Autoclub" class="brand-logo__img ac-brand-logo" style="height: 48px;">
+    @include('shop.partials.brand_logo', ['width' => 200, 'height' => 48, 'variant' => 'header', 'class' => 'brand-logo__wrap ac-brand-logo'])
 </a>

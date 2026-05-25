@@ -16,6 +16,9 @@
 /node_modules
 /package-lock.json
 /database/mysql/
+/database/*.sqlite
+/storage/framework/views/
+/storage/framework/cache/
 /public/build
 /public/fonts-manifest.dev.json
 /public/hot

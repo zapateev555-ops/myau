@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $categories = Category::withCount('products')->get();
+        $featuredProducts = Product::query()
+            ->where('available', true)
+            ->with('category')
+            ->latest()
+            ->limit(12)
+            ->get();
 
-        return view('shop.index', compact('categories'));
+        return view('shop.index', compact('featuredProducts'));
     }
 
     public function about()

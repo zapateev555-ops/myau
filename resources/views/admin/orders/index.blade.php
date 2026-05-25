@@ -82,7 +82,7 @@
         </div>
     </div>
     @if($orders->hasPages())
-    <div class="nx-panel__body border-top">{{ $orders->links() }}</div>
+    <div class="nx-panel__body border-top nx-pagination-wrap">{{ $orders->withQueryString()->links('pagination::admin') }}</div>
     @endif
 </div>
 @endsection

@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateDockBadge(count) {
-        document.querySelectorAll('.ac-dock__badge').forEach(function (badge) {
+        document.querySelectorAll('.ac-navbar__badge, .ac-dock__badge').forEach(function (badge) {
             if (count > 0) {
                 badge.textContent = String(count);
                 badge.style.display = '';

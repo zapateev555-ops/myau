@@ -32,23 +32,11 @@ class Product extends Model
 
     public function hasWhiteMatteBackground(): bool
     {
-        if (! $this->image) {
-            return false;
-        }
-
-        return in_array(
-            strtolower(pathinfo($this->image, PATHINFO_EXTENSION)),
-            ['jpg', 'jpeg'],
-            true
-        );
+        return false;
     }
 
     public function hasImageFile(): bool
     {
-        if (! $this->image) {
-            return false;
-        }
-
         return is_file(public_path('images/products/'.$this->image))
             || is_file(public_path('storage/'.$this->image));
     }
@@ -56,17 +44,27 @@ class Product extends Model
     public function imageUrl(): string
     {
         if ($this->image) {
-            $productsPath = public_path('images/products/'.$this->image);
-            if (file_exists($productsPath)) {
-                return asset('images/products/'.$this->image);
+            $base = pathinfo($this->image, PATHINFO_FILENAME);
+            foreach (['jpg', 'jpeg', 'webp', 'png'] as $ext) {
+                $path = public_path('images/products/'.$base.'.'.$ext);
+                if (is_file($path)) {
+                    return asset('images/products/'.$base.'.'.$ext);
+                }
             }
-
-            $storagePath = public_path('storage/'.$this->image);
-            if (file_exists($storagePath)) {
-                return asset('storage/'.$this->image);
+            $productsPath = public_path('images/products/'.$this->image);
+            if (is_file($productsPath)) {
+                return asset('images/products/'.$this->image);
             }
         }
 
-        return asset('images/tire-placeholder.svg');
+        $category = $this->relationLoaded('category') ? $this->category : $this->category()->first();
+        if ($category) {
+            $categoryPhoto = public_path('images/categories/'.$category->slug.'.jpg');
+            if (is_file($categoryPhoto)) {
+                return asset('images/categories/'.$category->slug.'.jpg');
+            }
+        }
+
+        return asset('images/parts-placeholder.svg');
     }
 }

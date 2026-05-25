@@ -4,7 +4,7 @@
 <div class="container py-5" id="cart-page">
     <div class="text-center mb-4">
         <h1 class="ac-content-title"><i class="fas fa-shopping-cart me-2"></i>Корзина</h1>
-        <p class="lead">Выбранные автомобильные шины</p>
+        <p class="lead">Выбранные автозапчасти</p>
     </div>
     @if($cart->items->isNotEmpty())
     <div class="row">

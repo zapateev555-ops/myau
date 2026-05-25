@@ -1,7 +1,7 @@
 @extends('shop.layouts.app')
 @section('title', 'Редактирование профиля')
 @section('content')
-<div class="container py-5">
+<div class="mp-container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <div class="card shadow-sm p-4">

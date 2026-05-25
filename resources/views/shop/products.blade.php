@@ -3,54 +3,56 @@
 @section('title', 'Каталог')
 
 @section('content')
-<div class="catalog-hero text-center">
-    <div class="catalog-hero__inner">
-        <h1 class="fw-bold display-6 mb-2">Каталог шин</h1>
-        <p class="lead mb-0">Более 500 моделей от ведущих производителей</p>
-    </div>
-</div>
+<div class="mp-container mp-catalog-page">
+    <nav aria-label="breadcrumb" class="mp-breadcrumb">
+        <a href="{{ route('index') }}">Главная</a>
+        <span>/</span>
+        <span>Каталог</span>
+        @if($currentCategory !== 'all')
+        <span>/</span>
+        <span>{{ $categories->firstWhere('slug', $currentCategory)?->name }}</span>
+        @endif
+    </nav>
 
-<div class="catalog-toolbar">
-    <div>
-        <span class="section-eyebrow d-block">Каталог</span>
-        <h2 class="section-title mb-0 h4">Все товары</h2>
-    </div>
-    <div class="dropdown">
-        <button class="btn btn-primary-custom dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            <i class="fas fa-sliders me-1"></i> Категория
-        </button>
-        <ul class="dropdown-menu shadow border-0">
-            <li><a class="dropdown-item" href="{{ route('products', ['category' => 'all']) }}">Все</a></li>
-            @foreach($categories as $category)
-            <li><a class="dropdown-item" href="{{ route('products', ['category' => $category->slug]) }}">{{ $category->name }}</a></li>
-            @endforeach
-        </ul>
-    </div>
-</div>
+    <div class="mp-catalog-layout">
+        @include('shop.partials.catalog_sidebar')
 
-<div class="ac-page-wrap">
-    <div class="d-flex d-md-none flex-nowrap overflow-auto gap-2 mb-4 pb-1">
-        <a href="{{ route('products', ['category' => 'all']) }}" class="btn btn-sm btn-primary-custom flex-shrink-0">Все</a>
-        @foreach($categories as $category)
-        <a href="{{ route('products', ['category' => $category->slug]) }}" class="btn btn-sm btn-outline-ac flex-shrink-0">{{ $category->name }}</a>
-        @endforeach
-    </div>
-
-    <div class="row g-4">
-        @forelse($products as $product)
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            @include('shop.partials.product_card', ['product' => $product])
-        </div>
-        @empty
-        <div class="col-12">
-            <div class="benefit-item text-center py-5">
-                <div class="benefit-icon mx-auto mb-3"><i class="fas fa-box-open"></i></div>
-                <h3 class="fw-bold">Шины не найдены</h3>
-                <p class="text-muted mb-4">Попробуйте другую категорию</p>
-                <a href="{{ route('products') }}" class="btn btn-accent">Сбросить фильтры</a>
+        <div class="mp-catalog-main">
+            <div class="mp-catalog-main__head">
+                <h1>
+                    @if($search)
+                    Поиск: «{{ $search }}»
+                    @elseif($currentCategory !== 'all')
+                    {{ $categories->firstWhere('slug', $currentCategory)?->name }}
+                    @else
+                    Все автозапчасти
+                    @endif
+                </h1>
+                <span class="mp-catalog-main__count">{{ $products->count() }} {{ $products->count() === 1 ? 'товар' : ($products->count() < 5 ? 'товара' : 'товаров') }}</span>
             </div>
+
+            <div class="mp-chips d-lg-none">
+                <a href="{{ route('products', array_filter(['category' => 'all', 'q' => $search ?: null])) }}" class="mp-chip {{ $currentCategory === 'all' ? 'is-active' : '' }}">Все</a>
+                @foreach($categories as $category)
+                <a href="{{ route('products', array_filter(['category' => $category->slug, 'q' => $search ?: null])) }}" class="mp-chip {{ $currentCategory === $category->slug ? 'is-active' : '' }}">{{ $category->name }}</a>
+                @endforeach
+            </div>
+
+            @if($products->isEmpty())
+            <div class="mp-empty">
+                <i class="fas fa-box-open"></i>
+                <h3>Ничего не найдено</h3>
+                <p>Попробуйте другой запрос или категорию</p>
+                <a href="{{ route('products') }}" class="btn btn-glow">Сбросить</a>
+            </div>
+            @else
+            <div class="mp-product-grid">
+                @foreach($products as $product)
+                @include('shop.partials.product_card', ['product' => $product])
+                @endforeach
+            </div>
+            @endif
         </div>
-        @endforelse
     </div>
 </div>
 @endsection

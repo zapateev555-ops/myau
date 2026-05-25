@@ -95,7 +95,7 @@
 <div class="card shadow-sm border-0">
     <div class="card-body p-0">
         <div class="table-responsive">
-            <table class="table table-hover mb-0 align-middle">
+            <table class="table table-hover mb-0 align-middle nx-products-table">
                 <thead class="table-light">
                     <tr>
                         <th>ID</th>
@@ -111,9 +111,9 @@
                     @forelse($products as $product)
                     <tr>
                         <td>{{ $product->id }}</td>
-                        <td style="min-width: 140px;">
+                        <td class="nx-product-cell">
                             <div class="nx-product-photo">
-                                <img src="{{ $product->imageUrl() }}" alt="">
+                                <img src="{{ $product->imageUrl() }}" alt="" width="56" height="56" loading="lazy" decoding="async">
                             </div>
                             <form action="{{ route('admin.products.image.store', $product) }}" method="POST" enctype="multipart/form-data" class="mb-1">
                                 @csrf
@@ -165,7 +165,7 @@
         </div>
     </div>
     @if($products->hasPages())
-    <div class="card-footer">{{ $products->links() }}</div>
+    <div class="card-footer nx-pagination-wrap">{{ $products->withQueryString()->links('pagination::admin') }}</div>
     @endif
 </div>
 @endsection

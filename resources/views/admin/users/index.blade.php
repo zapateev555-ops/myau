@@ -64,7 +64,7 @@
         </div>
     </div>
     @if($users->hasPages())
-    <div class="card-footer">{{ $users->links() }}</div>
+    <div class="card-footer nx-pagination-wrap">{{ $users->withQueryString()->links('pagination::admin') }}</div>
     @endif
 </div>
 @endsection

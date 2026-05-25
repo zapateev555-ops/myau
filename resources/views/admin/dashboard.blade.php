@@ -64,7 +64,7 @@
                         <td><span class="badge status-badge status-{{ $order->status }}">{{ $order->statusLabel() }}</span></td>
                         <td>
                             @if($order->paid)
-                            <span class="badge" style="background:var(--nx-accent-dim);color:var(--nx-accent)">Оплачен</span>
+                            <span class="badge" style="background:var(--nx-brand-light);color:var(--nx-brand)">Оплачен</span>
                             @else
                             <span class="badge bg-secondary">Нет</span>
                             @endif

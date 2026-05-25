@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 280" fill="none" role="img" aria-label="2B>70?G0AB8">
+  <rect width="320" height="280" rx="24" fill="#f5f5f4"/>
+  <circle cx="160" cy="130" r="72" stroke="#ea580c" stroke-width="6" opacity="0.25"/>
+  <circle cx="160" cy="130" r="28" fill="#ea580c" opacity="0.9"/>
+  <path d="M160 58v18M160 184v18M88 130h18M214 130h18" stroke="#ea580c" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <rect x="72" y="210" width="176" height="36" rx="10" fill="#292524"/>
+  <text x="160" y="234" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#fff">"'!"</text>
+</svg>
