@@ -2,6 +2,6 @@
 builder = "RAILPACK"
 
 [deploy]
-releaseCommand = "php artisan migrate --force --no-interaction && php artisan db:seed --force"
+preDeployCommand = "chmod +x ./railway/init.sh && sh ./railway/init.sh"
 healthcheckPath = "/up"
 restartPolicyType = "ON_FAILURE"

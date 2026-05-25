@@ -17,6 +17,13 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        if ($databaseUrl = env('DATABASE_URL')) {
+            config([
+                'database.default' => env('DB_CONNECTION', 'pgsql'),
+                'database.connections.pgsql.url' => $databaseUrl,
+            ]);
+        }
+
         Paginator::useBootstrapFive();
 
         if ($this->app->environment('production')) {
