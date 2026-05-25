@@ -1,0 +1,7 @@
+[build]
+builder = "RAILPACK"
+
+[deploy]
+releaseCommand = "php artisan migrate --force --no-interaction"
+healthcheckPath = "/up"
+restartPolicyType = "ON_FAILURE"
